@@ -26,6 +26,10 @@
     'data': [
         # 'security/ir.model.access.csv',
         'templates.xml',
+        'views/main.xml',
+        'views/player.xml',
+        'views/debt.xml',
+        'views/payment.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
