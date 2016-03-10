@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<openerp>
+    <data>
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a 'window action',
+            that is an action opening a view or a set of views
+        -->
+        <!-- Action to open player -->
+        <act_window 
+            id='do_player_action' 
+            name='Players' 
+            res_model='system.player' 
+            view_mode='tree,form,search'/>
+
+        <menuitem 
+            id='second_left_player' 
+            name='Players' 
+            parent='module_jugadores' 
+            action='do_player_action'/>
+        <!-- Full id location:
+             action='openacademy.course_list_action'
+             It is not required when it is the same module -->
+
+        <!-- view -->
+        <record id='view_form_player' model='ir.ui.view'>
+            <field name='name'>player Form</field>
+            <field name='model'>system.player</field>
+            <field name='arch' type='xml'>
+            <form>
+                <header>
+                </header>
+                <sheet>
+                <group name='group_top'>
+                    <group name='group_left'>
+
+                        <field name='player_name' placeholder='Nombre del Jugador'/>
+
+                    </group>
+                </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <!-- Tree -->
+        <record id='view_tree_player' model='ir.ui.view'>
+            <field name='name'>player Tree</field>
+            <field name='model'>system.player</field>
+            <field name='arch' type='xml'>
+            <tree>
+
+                    <field name='player_name'/>
+                    <field name='debts_ids'/>
+                    <field name='payments_ids'/>
+                    <field name='total_payments'/>
+            </tree>
+            </field>
+        </record>
+    </data>
+</openerp>
