@@ -16,13 +16,18 @@ class Player(models.Model):
     							string="Deudas"
     							)
 
+    total_debts = fields.Char(string="Total Deudas",
+                              compute="_all_debts",
+                              help="Total de prestamos hechos"
+                              )
+
     payments_ids = fields.One2many("system.payment",
     							   "player_ids",
                                    string="Pagos")
 
-    total_payments = fields.Char(string="Total Pago",
-                                    compute="_all_payments",
-                                    help="Total de pagos hechos")
+    total_payments = fields.Char(string="Total Pagos",
+                                 compute="_all_payments",
+                                 help="Total de pagos hechos")
 
     #TODO debts relacion
     @api.one
@@ -34,6 +39,16 @@ class Player(models.Model):
             count += c.monto_payment
 
         self.total_payments = str(count)
+    
+    @api.one
+    @api.depends('debts_ids')
+    def _all_debts(self):
+        self.total_debts = " "
+        count = 0
+        for c in self.debts_ids:
+            count += c.monto_debt
+
+        self.total_debts = str(count)
     
 
 class Debt(models.Model):
